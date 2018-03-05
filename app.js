@@ -1,5 +1,6 @@
 var exec = require('child_process').execSync;
 var _ = require('lodash');
+var argv = require('boring')();
 var history = exec('git log -p', { encoding: 'utf8' });
 var tags = exec('git tag', { encoding: 'utf8' }).split('\n');
 var tagMap = {};
@@ -50,5 +51,8 @@ while (true) {
 exec('git checkout --quiet master');
 _.each(newTags, function(commit, version) {
   console.log('git tag ' + version + ' ' + commit);
-  exec('git tag ' + version + ' ' + commit);
+  if (!argv['dry-run']) {
+    exec('git tag ' + version + ' ' + commit);
+  }
 });
+console.log('Finished. Do not forget to run "git push --tags" if you are satisfied.');

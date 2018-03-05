@@ -6,9 +6,20 @@ Obviously, that's a subjective thing. So use this at your own risk.
 
 ## Usage
 
+```
 npm install -g tag-old-releases
 cd src/my-repo
 tag-old-releases
+```
+
+To print `git tag` commands without actually running them:
+
+```
+npm install -g tag-old-releases
+cd src/my-repo
+tag-old-releases --dry-run
+```
+
 
 ## How it works
 

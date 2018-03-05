@@ -1,6 +1,6 @@
 {
   "name": "tag-old-releases",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Tag old npm releases that never got a git tag. Run in your repo at your own risk.",
   "main": "app.js",
   "scripts": {
@@ -19,8 +19,12 @@
   "bugs": {
     "url": "https://github.com/punkave/tag-old-releases/issues"
   },
+  "bin": {
+    "tag-old-releases": "./bin/tag-old-releases"
+  },
   "homepage": "https://github.com/punkave/tag-old-releases#readme",
   "dependencies": {
+    "boring": "^0.1.0",
     "lodash": "^4.17.5",
     "semver-compare": "^1.0.0"
   }
