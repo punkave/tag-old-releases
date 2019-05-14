@@ -34,7 +34,7 @@ while (true) {
     continue;
   }
   version = JSON.parse(fs.readFileSync('package.json')).version;
-  if (compare(version, latestVersion) > 0) {
+  if (compare(version, latestVersion) < 0) {
     continue;
   }
   if (version !== previousVersion) {
