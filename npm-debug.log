@@ -1,0 +1,113 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/home/boutell/.nvm/versions/node/v6.17.1/bin/node',
+1 verbose cli   '/home/boutell/.nvm/versions/node/v6.17.1/bin/npm',
+1 verbose cli   'publish',
+1 verbose cli   '--otp' ]
+2 info using npm@3.10.10
+3 info using node@v6.17.1
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec Result {
+7 silly cache add   raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   escapedName: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: '/home/boutell/punkave/tag-old-releases',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory /home/boutell/.npm/tag-old-releases/1.0.2/package.tgz not in flight; packing
+9 verbose correctMkdir /home/boutell/.npm correctMkdir not in flight; initializing
+10 info lifecycle tag-old-releases@1.0.2~prepublish: tag-old-releases@1.0.2
+11 silly lifecycle tag-old-releases@1.0.2~prepublish: no script for prepublish, continuing
+12 verbose tar pack [ '/home/boutell/.npm/tag-old-releases/1.0.2/package.tgz',
+12 verbose tar pack   '/home/boutell/punkave/tag-old-releases' ]
+13 verbose tarball /home/boutell/.npm/tag-old-releases/1.0.2/package.tgz
+14 verbose folder /home/boutell/punkave/tag-old-releases
+15 verbose addLocalTarball adding from inside cache /home/boutell/.npm/tag-old-releases/1.0.2/package.tgz
+16 verbose correctMkdir /home/boutell/.npm correctMkdir not in flight; initializing
+17 silly cache afterAdd tag-old-releases@1.0.2
+18 verbose afterAdd /home/boutell/.npm/tag-old-releases/1.0.2/package/package.json not in flight; writing
+19 verbose correctMkdir /home/boutell/.npm correctMkdir not in flight; initializing
+20 verbose afterAdd /home/boutell/.npm/tag-old-releases/1.0.2/package/package.json written
+21 silly publish { name: 'tag-old-releases',
+21 silly publish   version: '1.0.2',
+21 silly publish   description: 'Tag old npm releases that never got a git tag. Run in your repo at your own risk.',
+21 silly publish   main: 'app.js',
+21 silly publish   scripts: { test: 'echo "Error: no test specified" && exit 1' },
+21 silly publish   repository:
+21 silly publish    { type: 'git',
+21 silly publish      url: 'git+https://github.com/punkave/tag-old-releases.git' },
+21 silly publish   keywords: [ 'npm', 'tag' ],
+21 silly publish   author: { name: 'P\'unk Avenue LLC' },
+21 silly publish   license: 'MIT',
+21 silly publish   bugs: { url: 'https://github.com/punkave/tag-old-releases/issues' },
+21 silly publish   bin: { 'tag-old-releases': './bin/tag-old-releases' },
+21 silly publish   homepage: 'https://github.com/punkave/tag-old-releases#readme',
+21 silly publish   dependencies:
+21 silly publish    { boring: '^0.1.0',
+21 silly publish      lodash: '^4.17.5',
+21 silly publish      'semver-compare': '^1.0.0' },
+21 silly publish   readme: '# tag-old-releases\n\nDid you forget to tag all your npm releases in git? Yeah me too. This utility tags them retroactively.\n\nObviously, that\'s a subjective thing. So use this at your own risk.\n\n## Usage\n\n```\nnpm install -g tag-old-releases\ncd src/my-repo\ntag-old-releases\n```\n\nTo print `git tag` commands without actually running them:\n\n```\nnpm install -g tag-old-releases\ncd src/my-repo\ntag-old-releases --dry-run\n```\n\n\n## How it works\n\n`tag-old-releases` scans through `git log` of the `master` branch, checking out each commit as it goes backwards through time. The oldest release in which `package.json` has a given `version` is tagged as the release for this version, unless a tag already exists. Tags are named simply `x.y.z` (version number).\n\nThe rationale is that your release process looks like this:\n\n* People contribute changes, which get merged over various commits, all of which have the old version number\n* You decide what the new version number will be when you are actually ready to release, which makes sense for semantic versioning reasons; in that commit you edit your changelog and package.json\n* That stuff gets merged back to `master`\n* You `npm publish`\n\nIf your process differs — for instance if well-meaning contributors bump the version number early and then other critical commits are made before `npm publish` - then this script will make the wrong choice for those versions. Sorry - best we can do.\n\n## A better idea (going forward)\n\nIn future, we suggest a script like this in place of `npm publish`:\n\n```\n#!/usr/bin/env node\n\nvar exec = require(\'child_process\').execSync;\nvar version = require(process.cwd() + \'/package.json\').version;\nexec(\'git tag \' + version + \' && git push --tags && npm publish\');\n```\n\nThis will keep you out of trouble by tagging releases at the time you publish.\n',
+21 silly publish   readmeFilename: 'README.md',
+21 silly publish   gitHead: '970249129030a1caba86c7f03343b23b447fdf62',
+21 silly publish   _id: 'tag-old-releases@1.0.2',
+21 silly publish   _shasum: '703d5e842366958929ff10a4e08461c5cf82523f',
+21 silly publish   _from: '.' }
+22 verbose getPublishConfig undefined
+23 silly mapToRegistry name tag-old-releases
+24 silly mapToRegistry using default registry
+25 silly mapToRegistry registry https://registry.npmjs.org/
+26 silly mapToRegistry data Result {
+26 silly mapToRegistry   raw: 'tag-old-releases',
+26 silly mapToRegistry   scope: null,
+26 silly mapToRegistry   escapedName: 'tag-old-releases',
+26 silly mapToRegistry   name: 'tag-old-releases',
+26 silly mapToRegistry   rawSpec: '',
+26 silly mapToRegistry   spec: 'latest',
+26 silly mapToRegistry   type: 'tag' }
+27 silly mapToRegistry uri https://registry.npmjs.org/tag-old-releases
+28 verbose publish registryBase https://registry.npmjs.org/
+29 silly publish uploading /home/boutell/.npm/tag-old-releases/1.0.2/package.tgz
+30 verbose request uri https://registry.npmjs.org/tag-old-releases
+31 verbose request sending authorization for write operation
+32 info attempt registry request try #1 at 7:43:44 AM
+33 verbose request using bearer token for auth
+34 verbose request id 7f6a89a7bae24070
+35 http request PUT https://registry.npmjs.org/tag-old-releases
+36 http 401 https://registry.npmjs.org/tag-old-releases
+37 verbose headers { date: 'Fri, 17 May 2019 11:43:45 GMT',
+37 verbose headers   'content-type': 'application/json',
+37 verbose headers   'content-length': '100',
+37 verbose headers   connection: 'keep-alive',
+37 verbose headers   'set-cookie': [ '__cfduid=d451c051f66d57f3afcc2d718c4dd59371558093425; expires=Sat, 16-May-20 11:43:45 GMT; path=/; domain=.registry.npmjs.org; HttpOnly' ],
+37 verbose headers   'cf-ray': '4d8555e29fb69228-EWR',
+37 verbose headers   'expect-ct': 'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"',
+37 verbose headers   'www-authenticate': 'OTP',
+37 verbose headers   vary: 'Accept-Encoding',
+37 verbose headers   server: 'cloudflare' }
+38 verbose request invalidating /home/boutell/.npm/registry.npmjs.org/tag-old-releases on PUT
+39 error publish Failed PUT 401
+40 verbose stack Error: You must provide a one-time pass. Upgrade your client to npm@latest in order to use 2FA. : tag-old-releases
+40 verbose stack     at makeError (/home/boutell/.nvm/versions/node/v6.17.1/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:302:12)
+40 verbose stack     at CachingRegistryClient.<anonymous> (/home/boutell/.nvm/versions/node/v6.17.1/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:290:14)
+40 verbose stack     at Request._callback (/home/boutell/.nvm/versions/node/v6.17.1/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:210:14)
+40 verbose stack     at Request.self.callback (/home/boutell/.nvm/versions/node/v6.17.1/lib/node_modules/npm/node_modules/request/request.js:187:22)
+40 verbose stack     at emitTwo (events.js:106:13)
+40 verbose stack     at Request.emit (events.js:191:7)
+40 verbose stack     at Request.<anonymous> (/home/boutell/.nvm/versions/node/v6.17.1/lib/node_modules/npm/node_modules/request/request.js:1048:10)
+40 verbose stack     at emitOne (events.js:96:13)
+40 verbose stack     at Request.emit (events.js:188:7)
+40 verbose stack     at IncomingMessage.<anonymous> (/home/boutell/.nvm/versions/node/v6.17.1/lib/node_modules/npm/node_modules/request/request.js:969:12)
+41 verbose statusCode 401
+42 verbose pkgid tag-old-releases
+43 verbose cwd /home/boutell/punkave/tag-old-releases
+44 error Linux 4.18.0-17-generic
+45 error argv "/home/boutell/.nvm/versions/node/v6.17.1/bin/node" "/home/boutell/.nvm/versions/node/v6.17.1/bin/npm" "publish" "--otp"
+46 error node v6.17.1
+47 error npm  v3.10.10
+48 error code E401
+49 error You must provide a one-time pass. Upgrade your client to npm@latest in order to use 2FA. : tag-old-releases
+50 error If you need help, you may report this error at:
+50 error     <https://github.com/npm/npm/issues>
+51 verbose exit [ 1, true ]
