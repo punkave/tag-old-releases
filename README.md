@@ -47,3 +47,18 @@ exec('git tag ' + version + ' && git push --tags && npm publish');
 ```
 
 This will keep you out of trouble by tagging releases at the time you publish.
+
+## Changelog
+
+### 1.0.4
+
+Commented and refactored a bit. Thanks to Daniel Lando.
+
+### 1.0.3
+
+Initial fix to an ordering issue. Thanks to Daniel Lando.
+
+### 1.0.0-1.0.2
+
+Initial releases.
+
