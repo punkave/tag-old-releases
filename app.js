@@ -23,7 +23,23 @@ var compare = require('semver-compare');
 var matches = history.match(/^commit (\w+)/);
 commit = matches[1];
 previousCommit = commit;
-var latestVersion = JSON.parse(fs.readFileSync('package.json')).version;
+
+// Get the version from package.json
+function getVersion(){
+  // skip this commit if there isn't a package.json to get the version
+  if (!fs.existsSync('package.json')) {
+    return null;
+  }
+  var pkg = fs.readFileSync('package.json');
+  // get the version of the application in that commit
+  try {
+    return JSON.parse(pkg).version;
+  } catch (err) {
+    return (/"version": "([\d.]+)"/g.exec(pkg))[1];
+  }
+}
+
+var latestVersion = getVersion();
 var previousVersion = latestVersion;
 var newTags = {};
 
@@ -36,13 +52,18 @@ while (true) {
   }
   // get commit id from regex result
   commit = result[1];
-  exec('git checkout --quiet ' + commit);
-  // skip this commit if there isn't a package.json to get the version
-  if (!fs.existsSync('package.json')) {
+
+  try {
+    exec('git clean -f -d && git checkout --quiet ' + commit);
+  } catch (error) {
+    console.log(error.message);
     continue;
   }
-  // get the version of the application in that commit
-  version = JSON.parse(fs.readFileSync('package.json')).version;
+
+  version = getVersion()
+  
+  if(!version) continue;
+
   // if the version is grather than the last one from master skip this version
   if (compare(version, latestVersion) > 0) {
     continue;
