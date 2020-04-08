@@ -2,7 +2,8 @@ var exec = require('child_process').execSync;
 var _ = require('lodash');
 var argv = require('boring')();
 var history = exec('git log -p', {
-  encoding: 'utf8'
+  encoding: 'utf8',
+  maxBuffer: 500*1024*1024
 });
 var tags = exec('git tag', {
   encoding: 'utf8'
