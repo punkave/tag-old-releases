@@ -22,6 +22,7 @@ var previousCommit;
 var fs = require('fs');
 var compare = require('semver-compare');
 var matches = history.match(/^commit (\w+)/);
+var mainBranch = argv.branch || 'master';
 commit = matches[1];
 previousCommit = commit;
 
@@ -62,10 +63,10 @@ while (true) {
   }
 
   version = getVersion()
-  
+
   if(!version) continue;
 
-  // if the version is grather than the last one from master skip this version
+  // if the version is greater than the last one from the main branch skip this version
   if (compare(version, latestVersion) > 0) {
     continue;
   }
@@ -82,11 +83,16 @@ while (true) {
   previousCommit = commit;
   previousVersion = version;
 }
-exec('git checkout --quiet master');
+exec('git checkout --quiet ' + mainBranch);
 _.each(newTags, function (commit, version) {
   console.log('git tag ' + version + ' ' + commit);
   if (!argv['dry-run']) {
     exec('git tag ' + version + ' ' + commit);
   }
 });
-console.log('Finished. Do not forget to run "git push --tags" if you are satisfied.');
+
+console.log('Finished.');
+if (!argv['dry-run']) {
+  exec('git tag ' + version + ' ' + commit);
+  console.log('Do not forget to run "git push --tags" if you are satisfied.');
+}

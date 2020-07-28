@@ -12,6 +12,8 @@ cd src/my-repo
 tag-old-releases
 ```
 
+### Dry run
+
 To print `git tag` commands without actually running them:
 
 ```
@@ -20,6 +22,15 @@ cd src/my-repo
 tag-old-releases --dry-run
 ```
 
+### Using a specific branch
+
+Is your default or production branch not called `master`? You can pass another branch name to use that as the reference:
+
+```
+tag-old-releases --branch=main
+```
+
+This can be used together with `--dry-run` as well.
 
 ## How it works
 
@@ -50,15 +61,19 @@ This will keep you out of trouble by tagging releases at the time you publish.
 
 ## Changelog
 
+### 1.1.0 - 2020-07-29
+
+- Adds a `--branch` option to use a reference branch other than `master`.
+
 ### 1.0.4
 
-Commented and refactored a bit. Thanks to Daniel Lando.
+- Commented and refactored a bit. Thanks to Daniel Lando.
 
 ### 1.0.3
 
-Initial fix to an ordering issue. Thanks to Daniel Lando.
+- Initial fix to an ordering issue. Thanks to Daniel Lando.
 
 ### 1.0.0-1.0.2
 
-Initial releases.
+- Initial releases.
 
