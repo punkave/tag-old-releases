@@ -90,4 +90,9 @@ _.each(newTags, function (commit, version) {
     exec('git tag ' + version + ' ' + commit);
   }
 });
-console.log('Finished. Do not forget to run "git push --tags" if you are satisfied.');
+
+console.log('Finished.');
+if (!argv['dry-run']) {
+  exec('git tag ' + version + ' ' + commit);
+  console.log('Do not forget to run "git push --tags" if you are satisfied.');
+}
